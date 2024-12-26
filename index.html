@@ -125,7 +125,7 @@
 
         function startGame() {
             const names = document.getElementById("playerNames").value.split(",").map(name => name.trim());
-            maxPoints = parseInt(document.getElementById("maxPoints").value);
+            maxPoints = parseInt(document.getElementById("maxPoints").value) - 1;
 
             if (names.length === 0 || isNaN(maxPoints)) {
                 alert("Please provide valid inputs.");
