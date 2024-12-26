@@ -106,9 +106,26 @@
         let players = [];
         let maxPoints;
 
+        function saveGameState() {
+            localStorage.setItem("gameState", JSON.stringify({ players, maxPoints }));
+        }
+
+        function loadGameState() {
+            const savedState = localStorage.getItem("gameState");
+            if (savedState) {
+                const { players: savedPlayers, maxPoints: savedMaxPoints } = JSON.parse(savedState);
+                players = savedPlayers;
+                maxPoints = savedMaxPoints;
+                document.getElementById("setup").style.display = "none";
+                document.getElementById("game").style.display = "block";
+                renderTable();
+                renderRoundInput();
+            }
+        }
+
         function startGame() {
             const names = document.getElementById("playerNames").value.split(",").map(name => name.trim());
-            maxPoints = parseInt(document.getElementById("maxPoints").value) - 1;
+            maxPoints = parseInt(document.getElementById("maxPoints").value);
 
             if (names.length === 0 || isNaN(maxPoints)) {
                 alert("Please provide valid inputs.");
@@ -116,6 +133,7 @@
             }
 
             players = names.map(name => ({ name, points: 0, status: "In" }));
+            saveGameState();
             document.getElementById("setup").style.display = "none";
             document.getElementById("game").style.display = "block";
             renderTable();
@@ -173,6 +191,7 @@
                 }
             });
 
+            saveGameState();
             renderTable();
             renderRoundInput();
 
@@ -186,7 +205,10 @@
             document.getElementById("game").style.display = "none";
             document.getElementById("winner").style.display = "block";
             document.getElementById("winnerName").textContent = winner ? winner.name : "No one (everyone is out)";
+            localStorage.removeItem("gameState");
         }
+
+        document.addEventListener("DOMContentLoaded", loadGameState);
     </script>
 </body>
 </html>
