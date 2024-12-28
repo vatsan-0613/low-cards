@@ -79,8 +79,12 @@
       }
 
       #history {
-        margin-top: 5%;
         margin-bottom: 5%;
+      }
+
+      .main-cont{
+        display: flex;
+        gap : 10px;
       }
     </style>
   </head>
@@ -99,6 +103,7 @@
         <button onclick="startGame()">Start Game</button>
       </div>
 
+      <div class="main-cont">
       <div id="game" style="display: none">
         <table>
           <thead>
@@ -122,8 +127,10 @@
       >
         <h2>Winner : <span id="winnerName"></span></h2>
       </div>
+      <div id="history">
+      </div>
     </div>
-    <div id="history">
+    
     </div>
 
     <script>
