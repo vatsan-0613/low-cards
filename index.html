@@ -153,7 +153,7 @@
       function loadGameState() {
         const savedState = localStorage.getItem("gameState");
         if (savedState) {
-          const { players: savedPlayers, maxPoints: savedMaxPoints } =
+          const { players: savedPlayers, maxPoints: savedMaxPoints} =
             JSON.parse(savedState);
           players = savedPlayers;
           maxPoints = savedMaxPoints;
@@ -232,8 +232,8 @@
           if (player.status === "In") {
             const pointsInput = document.getElementById(`points-${index}`);
             const points = parseInt(pointsInput.value);
-            player.history.push(points);
             if (!isNaN(points)) {
+              player.history.push(points);
               player.points += points;
               if (player.points > maxPoints) {
                 player.status = "Out";
@@ -244,7 +244,6 @@
           }
           console.log(player);
         });
-
         saveGameState();
         renderTable();
         renderRoundInput();
@@ -275,12 +274,22 @@
 
         const tbody = document.createElement("tbody");
 
-        for(let i=0; i<players[0].history.length; i++){
+        let rounds = 0 
+
+        for(let i=0; i<players.length; i++){
+          rounds = Math.max(rounds, players[i].history.length);
+        }
+
+        for(let i=0; i<rounds; i++){
             const dataRow = document.createElement("tr");
             for(let j=0; j<players.length; j++){
                 const point = players[j].history[i] 
                 const cell = document.createElement("td");
-                cell.append(point)
+                if(point===undefined){
+                  cell.append("nil")
+                }else{
+                  cell.append(point)
+                }
                 dataRow.appendChild(cell) 
             } 
             tbody.appendChild(dataRow)
