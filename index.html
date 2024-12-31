@@ -93,6 +93,7 @@
         }
       }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   </head>
   <body>
     <h1>LowCards Scoreboard</h1>
@@ -131,7 +132,7 @@
         id="winner"
         style="display: none; text-align: center; margin-top: 20px"
       >
-        <h2>Winner : <span id="winnerName"></span></h2>
+        <h2><span id="winnerName"></span></h2>
       </div>
       <div id="history">
       </div>
@@ -308,9 +309,14 @@
         const winner = players.find((player) => player.status === "In");
         document.getElementById("game").style.display = "none";
         document.getElementById("winner").style.display = "block";
-        document.getElementById("winnerName").textContent = winner
+        document.getElementById("winnerName").textContent = `${winner} wins the game !!!`
           ? winner.name
           : "No one (everyone is out)";
+          confetti({
+            particleCount: 1000,
+            spread: 70,
+            origin: { y: 0.6 },
+          });
         localStorage.removeItem("gameState");
       }
 
