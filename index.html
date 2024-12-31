@@ -204,6 +204,12 @@
                 `;
           tbody.appendChild(row);
         });
+        const maxPointsRow = document.createElement("tr");
+        maxPointsRow.innerHTML = `
+                    <td colspan="2">Max Points</td>
+                    <td>${maxPoints+1}</td>
+                `;
+        tbody.appendChild(maxPointsRow);
       }
 
       function renderRoundInput() {
