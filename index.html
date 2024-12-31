@@ -309,8 +309,8 @@
         const winner = players.find((player) => player.status === "In");
         document.getElementById("game").style.display = "none";
         document.getElementById("winner").style.display = "block";
-        document.getElementById("winnerName").textContent = `${winner} wins the game !!!`
-          ? winner.name
+        document.getElementById("winnerName").textContent = winner
+          ? `${winner.name} wins the game !!!`
           : "No one (everyone is out)";
           confetti({
             particleCount: 1000,
@@ -318,6 +318,8 @@
             origin: { y: 0.6 },
           });
         localStorage.removeItem("gameState");
+        const history = document.getElementById("history"); 
+        history.innerHTML = "";
       }
 
       document.addEventListener("DOMContentLoaded", loadGameState);
