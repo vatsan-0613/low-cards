@@ -87,6 +87,15 @@
         gap : 10px;
       }
 
+      img{
+        height: 40px;
+        width: 100%;
+      }
+
+      .status{
+        padding: 0;
+      }
+
       @media (max-width : 768px){
         .main-cont{
           flex-direction: column;
@@ -198,11 +207,16 @@
         tbody.innerHTML = "";
         players.forEach((player) => {
           const row = document.createElement("tr");
-          row.innerHTML = `
+          innerHTML = `
                     <td>${player.name}</td>
                     <td>${player.points}</td>
-                    <td class="${player.status}">${player.status}</td>
-                `;
+                    `
+          if(player.status === "Out"){
+            innerHTML += '<td class="${player.status}" class="status"><iframe src="https://giphy.com/embed/l52gPZpQAeIGTEmnbW" width="100" height="50" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></td>'
+          }else{
+            innerHTML += '<td class="status"><img src="/cash-flow.gif"/></td>'
+          }
+          row.innerHTML = innerHTML
           tbody.appendChild(row);
         });
         const maxPointsRow = document.createElement("tr");
