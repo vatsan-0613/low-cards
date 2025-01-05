@@ -327,10 +327,38 @@
           ? `${winner.name} wins the game !!!`
           : "No one (everyone is out)";
           confetti({
-            particleCount: 1000,
-            spread: 70,
-            origin: { y: 0.6 },
-          });
+  spread: 360,
+  ticks: 200,
+  gravity: 1,
+  decay: 0.94,
+  startVelocity: 30,
+  particleCount: 1000,
+  scalar: 3,
+  shapes: ["image"],
+  shapeOptions: {
+    image: [{
+        src: "/money-1.png",
+        width: 32,
+        height: 32,
+      },
+      {
+        src: "/money-2.png",
+        width: 32,
+        height: 32,
+      },
+      {
+        src: "/money-3.png",
+        width: 32,
+        height: 32,
+      },
+      {
+        src: "/money-4.png",
+        width: 32,
+        height: 32,
+      },
+    ],
+  },
+});
         localStorage.removeItem("gameState");
         const history = document.getElementById("history"); 
         history.innerHTML = "";
